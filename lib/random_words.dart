@@ -7,23 +7,26 @@ class RandomWords extends StatefulWidget {
 }
 
 class RandomWordsState extends State<RandomWords> {
-  final RandomWordPair = <WordPair>[];
+  final randomWordPair = <WordPair>[];
+  final savedWordPairs = Set<WordPair>();
   Widget _buildList() {
     return ListView.builder(
         padding: const EdgeInsets.all(10.0),
         itemBuilder: (context, item) {
           if (item.isOdd) return Divider();
           final index = item ~/ 2;
-          if (index >= RandomWordPair.length) {
-            RandomWordPair.addAll(generateWordPairs().take(10));
+          if (index >= randomWordPair.length) {
+            randomWordPair.addAll(generateWordPairs().take(10));
           }
-          return _buildRow(RandomWordPair[index]);
+          return _buildRow(randomWordPair[index]);
         });
   }
 
   Widget _buildRow(WordPair pair) {
+    final savedAlready = savedWordPairs.contains(pair);
     return ListTile(
-        title: Text(pair.asPascalCase, style: TextStyle(fontSize: 18.0)));
+        title: Text(pair.asPascalCase, style: TextStyle(fontSize: 18.0)),
+        trailing: Icon(savedAlready ? Icons.favorite : Icons.favorite_border, color: savedAlready ? Colors.red : null));
   }
 
   Widget build(BuildContext context) {
