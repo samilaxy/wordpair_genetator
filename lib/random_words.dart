@@ -48,15 +48,10 @@ class RandomWordsState extends State<RandomWords> {
         );
       });
       final List<Widget> divided =
-          ListTile.divideTiles(
-            context: context, 
-            tiles: tiles
-            ).toList();
+          ListTile.divideTiles(context: context, tiles: tiles).toList();
       return Scaffold(
-          appBar: AppBar(
-        title: Text('Saved WordPairs')),
-         body: ListView(children: divided)
-         );
+          appBar: AppBar(title: Text('Saved WordPairs')),
+          body: ListView(children: divided));
     }));
   }
 
